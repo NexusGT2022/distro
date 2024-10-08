@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project: ASSU</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #191970;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            position: relative;
+        }
+
+        .envelope {
+            width: 320px;
+            height: 220px;
+            background-color:blue;
+            position: relative;
+            cursor: pointer;
+            overflow: hidden;
+            transition: height 0.5s ease;
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 320px;
+            height: 110px;
+            background-color:#191970;
+            clip-path: polygon(0 0, 100% 0, 50% 100%);
+        }
+
+        .envelope.open {
+            height: 300px;
+        }
+
+        .letter {
+            position: absolute;
+            top: 110px;
+            left: 10px;
+            width: 300px;
+            height: 400px; /* Ajusta la altura para que se vea bien al abrirse */
+            background-color: goldenrod;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            overflow-y: auto; /* Permite el desplazamiento en caso de contenido largo */
+        }
+
+        .envelope.open + .letter {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-content {
+            padding: 15px;
+            text-align: center;
+            font-size: 20px; /* Aumenta el tamaño de fuente para mejor legibilidad */
+        }
+
+        .stamp {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            background-color:goldenrod; /* Color dorado */
+            border-radius: 50%;
+            text-align: center;
+            line-height: 60px;
+            font-weight: bold;
+            color: green;
+            font-size: 14px;
+            border: 2px solid #191970;
+        }
+
+        .address {
+            position: absolute;
+            top: 50px;
+            left: 20px;
+            font-size: 14px;
+            color: goldenrod;
+        }
+
+        .address .from {
+            margin-bottom: 10px;
+        }
+
+        .address .to {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="envelope" id="envelope">
+            <div class="stamp"></div>
+            <div class="address">
+                <div class="from">De: Ponce de Flores</div>
+                <div class="to">Para:</div>
+            </div>
+        </div>
+        <div class="letter" id="letter">
+            <div class="letter-content">
+                <p> Bajo el cielo infinito de tus ojos,
+se oculta un universo que nunca cesa,
+brillan estrellas en cada pestañeo,
+y me pierdo en tu mirada, tan inmensa.
+
+Tus cabellos son ríos de la noche,
+ondeando suaves con el viento,
+cada hebra, un hilo de la luna,
+tejiendo mi más profundo sentimiento.
+
+Tu voz, como susurro en la mañana,
+rompe el silencio con su melodía,
+cada palabra es un canto a la calma,
+una canción que embellece el día.
+
+Tus manos, esas que en mí se posan,
+son el tacto divino del cariño,
+y en cada roce siento el milagro
+de un amor puro, como el de un niño.
+
+Tu risa, Flores, es música celestial,
+una melodía que al alma llega,
+en cada nota encuentro la verdad
+de que contigo, la vida no se niega.
+
+Tus pasos, al caminar junto a mí,
+dejan huellas en el sendero del tiempo,
+y en cada uno veo el destino
+de un futuro que contigo contemplo.
+
+Eres la razón detrás de cada sueño,
+el faro que en la noche guía mi ser,
+mi refugio, mi hogar, mi anhelo,
+mi deseo de envejecer.
+
+Jamileth, en ti lo encuentro todo:
+la ternura, la fuerza, la pasión,
+eres la poesía que nunca agota,
+mi única y más grande canción.
+
+Te amo con la profundidad del silencio,
+con la furia del viento en el mar,
+porque en ti, mi amor, veo la vida,
+y sin ti, no sabría dónde estar ❤️🌹❤️‍🩹.</p>
+   
+                </div>
+        </div>
+    </div>
+    <script>
+        // Crear el fondo negro
+document.body.style.backgroundColor = 'black';
+document.body.style.margin = '0';
+document.body.style.overflow = 'hidden'; // Evitar scroll
+
+const numEstrellas = 1000; // Número de estrellas
+
+// Crear estrellas
+for (let i = 0; i < numEstrellas; i++) {
+    const estrella = document.createElement('div');
+    const tamaño = Math.random() * 3; // Tamaño aleatorio de la estrella
+
+    // Establecer estilos para las estrellas
+    estrella.style.width = `${tamaño}px`;
+    estrella.style.height = `${tamaño}px`;
+    estrella.style.backgroundColor = 'goldenrod';
+    estrella.style.position = 'absolute';
+    estrella.style.borderRadius = '50%';
+
+    // Posición aleatoria en la ventana
+    estrella.style.top = `${Math.random() * window.innerHeight}px`;
+    estrella.style.left = `${Math.random() * window.innerWidth}px`;
+
+    // Añadir estrella al documento
+    document.body.appendChild(estrella);
+
+    // Animar el parpadeo de las estrellas
+    (function animarEstrella(estrella) {
+        estrella.style.opacity = Math.random();
+        setTimeout(() => animarEstrella(estrella), Math.random() * 1000 + 500); // Parpadeo aleatorio
+    })(estrella);
+}
+    </script>
+    <script>
+    document.getElementById('envelope').addEventListener('click', function() {
+            this.classList.toggle('open');
+        });
+    </script>
+
+        
+
+</body>
+</html>
